@@ -1,0 +1,37 @@
+export interface Athlete {
+  nome: string;
+  nascimento: Date;
+  sexo: string;
+  responsavel: string;
+  endereco: string;
+  numero: string;
+  complemento: string;
+  cep: string;
+  cidade: string;
+  uf: string;
+  pais: string;
+  telefone: string;
+  celular: string;
+  email: string;
+  profissao: string;
+  emergenciaContato: string;
+  emergenciaFone: string;
+  emergenciaCelular: string;
+  dataCadastro: Date;
+  camisa: string;
+  camisaCiclismo: string;
+  mktLojaPreferida: string;
+  mktBikePreferida: string;
+  mktAro: string;
+  mktCambio: string;
+  mktFreio: string;
+  mktSuspensao: string;
+  mktMarcaPneu: string;
+  mktModeloPneu: string;
+  mktTenis: string;
+  acesso: string;
+  ativo: true;
+  federacao: string;
+  cpf: string;
+  rg: string;
+}

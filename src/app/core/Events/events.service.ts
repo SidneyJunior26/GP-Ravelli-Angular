@@ -10,15 +10,15 @@ const url = 'http://localhost:5173/eventos/';
 export class EventsService {
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<any> {
-    return this.http.get<any[]>(url);
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(url);
   }
 
-  getEventsActives(): Observable<any> {
-    return this.http.get<any[]>(url + 'true/true');
+  getEventsActives(): Observable<Event[]> {
+    return this.http.get<Event[]>(url + 'true/true');
   }
 
-  getEventById(id: string): Observable<any> {
-    return this.http.get<any>(url + id);
+  getEventById(id: string): Observable<Event> {
+    return this.http.get<Event>(url + id);
   }
 }
