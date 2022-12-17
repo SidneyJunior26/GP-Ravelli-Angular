@@ -1,0 +1,20 @@
+<div mat-dialog-title class="dialog-title">
+  <h2>Informe seu CPF/CNPJ</h2>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>X</button>
+</div>
+<div mat-dialog-content>
+  <mat-form-field class="input">
+    <input matInput type="number" [formControl]="cpfControl" required />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    cdkFocusInitial
+    color="accent"
+    type="submit"
+    (click)="findAthleteByCpf()"
+  >
+    Inscrever-se
+  </button>
+</div>

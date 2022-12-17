@@ -1,0 +1,140 @@
+<section>
+  <div class="container">
+    <h1 mat-dialog-title class="title">Confirme seus dados</h1>
+    <div mat-dialog-content [formGroup]="athleteControl" class="form-fields">
+      <mat-form-field style="width: 100%" appearance="outline">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput formControlName="nome" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Data de Nascimento</mat-label>
+        <input matInput type="datetime-local" formControlName="nascimento" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sexo">
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Feminino</mat-option>
+          <mat-option value="M">Outro</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 100%" appearance="outline">
+        <mat-label>Responsável (Menor de Idade)</mat-label>
+        <input matInput formControlName="responsavel" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>RG</mat-label>
+        <input matInput formControlName="rg" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="cep" type="text" />
+      </mat-form-field>
+      <mat-form-field style="width: 70%" appearance="outline">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="endereco" type="text" />
+      </mat-form-field>
+      <mat-form-field style="width: 20%" appearance="outline">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="numero" type="number" />
+      </mat-form-field>
+      <mat-form-field style="width: 60%" appearance="outline">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="complemento" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="cidade" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="uf">
+          <mat-option value="SP">SP</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>País</mat-label>
+        <mat-select formControlName="pais">
+          <mat-option value="BR">Brasil</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="vl"></div>
+      <h1 mat-dialog-title class="title" style="width: 100%">Contato</h1>
+      <mat-form-field appearance="outline">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="telefone" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="celular" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Contato de Emergência</mat-label>
+        <input
+          matInput
+          formControlName="emergenciaContato"
+          type="text"
+          placeholder="Nome"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Telefone Emergência</mat-label>
+        <input matInput formControlName="emergenciaTelefone" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Celular Emergência</mat-label>
+        <input matInput formControlName="emergenciaCelular" type="number" />
+      </mat-form-field>
+      <div class="vl"></div>
+      <h1 mat-dialog-title class="title" style="width: 100%">Adicionais</h1>
+      <mat-form-field appearance="outline">
+        <mat-label>Loja Preferida</mat-label>
+        <input matInput formControlName="mktLojaPreferida" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Bike Preferida</mat-label>
+        <input matInput formControlName="mktBikePreferida" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Aro Preferido</mat-label>
+        <input matInput formControlName="mktAro" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Aro Preferido</mat-label>
+        <input matInput formControlName="mktAro" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cambio Preferido</mat-label>
+        <input matInput formControlName="mktCambio" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Freio Preferido</mat-label>
+        <input matInput formControlName="mktFreio" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Suspensão Preferida</mat-label>
+        <input matInput formControlName="mktSuspensao" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Marca de Pneu Preferido</mat-label>
+        <input matInput formControlName="mktMarcaPneu" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Modelo de Pneu Preferido</mat-label>
+        <input matInput formControlName="mktModeloPneu" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Marca de Tênis Preferido</mat-label>
+        <input matInput formControlName="mktTenis" type="text" />
+      </mat-form-field>
+    </div>
+  </div>
+</section>

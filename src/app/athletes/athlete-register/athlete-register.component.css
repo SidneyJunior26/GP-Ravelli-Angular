@@ -1,0 +1,43 @@
+section {
+  background-color: rgb(33, 33, 33);
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  color: white;
+}
+
+input {
+  color: white;
+}
+
+.form-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.container {
+  width: 500px;
+  height: auto;
+  border: 1.5px solid #1f1411;
+  margin: 40px 0 40px 0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.rblGenre {
+  margin-top: 15px;
+  color: white;
+}
+
+.vl {
+  width: 100%;
+  border: 1px solid gray;
+  margin: 10px 0 10px 0;
+}
