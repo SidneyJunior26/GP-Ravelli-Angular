@@ -12,7 +12,11 @@ const routes: Routes = [
     path: 'eventos',
     children: [
       {
-        path: ':idEvento/:idAtleta',
+        path: ':idEvent',
+        component: AthleteRegisterComponent,
+      },
+      {
+        path: ':idEvent/:idAthlete',
         component: AthleteRegisterComponent,
       },
     ],

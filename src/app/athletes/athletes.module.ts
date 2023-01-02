@@ -8,6 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCommonModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [AthleteRegisterComponent],
@@ -20,6 +24,10 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCommonModule,
     MatRadioModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatIconModule,
+    MatExpansionModule,
   ],
 })
 export class AthletesModule {}

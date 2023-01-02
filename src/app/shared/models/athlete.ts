@@ -1,6 +1,6 @@
 export interface Athlete {
   nome: string;
-  nascimento: Date;
+  nascimento: string;
   sexo: string;
   responsavel: string;
   endereco: string;
@@ -17,7 +17,7 @@ export interface Athlete {
   emergenciaContato: string;
   emergenciaFone: string;
   emergenciaCelular: string;
-  dataCadastro: Date;
+  dataCadastro: string;
   camisa: string;
   camisaCiclismo: string;
   mktLojaPreferida: string;

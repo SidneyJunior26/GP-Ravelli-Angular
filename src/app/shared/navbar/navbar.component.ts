@@ -21,4 +21,12 @@ export class NavbarComponent implements OnInit {
   registerUser(): void {
     this.router.navigateByUrl('/register');
   }
+
+  onActivate() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
 }

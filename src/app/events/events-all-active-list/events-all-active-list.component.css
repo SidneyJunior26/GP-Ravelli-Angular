@@ -19,6 +19,9 @@ mat-card-actions {
 .header {
   text-align: center;
   margin-bottom: 40px;
+  background-color: rgb(66, 66, 66);
+  padding: 20px;
+  border-radius: 5px;
 }
 
 h1 {

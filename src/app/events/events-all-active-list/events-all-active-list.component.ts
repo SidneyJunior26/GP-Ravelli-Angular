@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AthletesService } from 'src/app/core/Athletes/athletes.service';
 import { EventsService } from 'src/app/core/Events/events.service';
 import { LoginComponent } from 'src/app/shared/login/login.component';
@@ -17,7 +18,9 @@ export class EventsAllActiveListComponent implements OnInit {
   constructor(
     private service: EventsService,
     private snackBar: MatSnackBar,
-    private serviceAthlete: AthletesService
+    private serviceAthlete: AthletesService,
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +44,6 @@ export class EventsAllActiveListComponent implements OnInit {
   }
 
   findUserByCpf(cpf: string, eventId: string) {
-    console.log(eventId);
-
     if (cpf == null || cpf == '') {
       this.openMessage('Informe seu CPF/CNPJ');
       return;
@@ -50,10 +51,12 @@ export class EventsAllActiveListComponent implements OnInit {
 
     this.serviceAthlete.getAthleteByCpf(cpf).subscribe(
       (athlete) => {
-        console.log(athlete);
+        localStorage.setItem('cpf', cpf);
+        this.dialog.open(LoginComponent);
       },
       (error) => {
-        if (error.status == 404) this.openMessage('Usuário não encontrado');
+        if (error.status == 404)
+          this.router.navigateByUrl('eventos/' + eventId);
       }
     );
   }

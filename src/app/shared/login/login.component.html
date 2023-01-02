@@ -1,11 +1,18 @@
 <div mat-dialog-title class="dialog-title">
-  <h2>Informe seu CPF/CNPJ</h2>
+  <h2>Faça seu Login</h2>
   <button mat-icon-button aria-label="close dialog" mat-dialog-close>X</button>
 </div>
 <div mat-dialog-content>
-  <mat-form-field class="input">
-    <input matInput type="number" [formControl]="cpfControl" required />
-  </mat-form-field>
+  <div mat-dialog-content [formGroup]="loginControl" class="form-fields">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>CPf/CNPJ</mat-label>
+      <input matInput type="number" formControlName="cpf" required />
+    </mat-form-field>
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="password" required />
+    </mat-form-field>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button
@@ -14,7 +21,8 @@
     color="accent"
     type="submit"
     (click)="findAthleteByCpf()"
+    [disabled]="loginControl.invalid"
   >
-    Inscrever-se
+    Login
   </button>
 </div>
