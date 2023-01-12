@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AthletesService } from 'src/app/core/Athletes/athletes.service';
 import { EventsService } from 'src/app/core/Events/events.service';
@@ -13,7 +14,7 @@ import { Event } from 'src/app/shared/models/events';
 })
 export class AthleteRegisterComponent implements OnInit {
   idEvent: string;
-  idAthlete: string;
+  cpfAthlete: string;
   event: Event;
   athlete: Athlete;
   isLinear = false;
@@ -22,7 +23,8 @@ export class AthleteRegisterComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private eventService: EventsService,
     private athleteService: AthletesService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) {}
 
   eventControl = this.formBuilder.group({
@@ -65,14 +67,117 @@ export class AthleteRegisterComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.idAthlete = this.activatedRoute.snapshot.params['idAthlete'];
     this.idEvent = this.activatedRoute.snapshot.params['idEvent'];
 
-    if (this.idAthlete != null) {
+    if (localStorage.getItem('cpf') != null) {
+      this.cpfAthlete = localStorage.getItem('cpf')!;
+      localStorage.removeItem('cpf');
+    }
+
+    if (this.cpfAthlete != null) {
       this.findAthlete();
     }
 
     this.loadEvent();
+  }
+
+  updateAthlete(): void {
+    const athleteUpdated: Athlete = {
+      nome: this.athleteControl.get('nome')!.value!.toString(),
+      nascimento: this.athleteControl.get('nascimento')!.value!.toString(),
+      sexo: this.athleteControl.get('sexo')!.value!.toString(),
+      responsavel:
+        this.athleteControl.get('responsavel')!.value != null
+          ? this.athleteControl.get('responsavel')!.value!.toString()
+          : '',
+      endereco: this.athleteControl.get('endereco')!.value!.toString(),
+      numero: this.athleteControl.get('numero')!.value!.toString(),
+      complemento:
+        this.athleteControl.get('complemento')!.value != null
+          ? this.athleteControl.get('complemento')!.value!.toString()
+          : '',
+      cep: this.athleteControl.get('cep')!.value!.toString(),
+      cidade: this.athleteControl.get('cidade')!.value!.toString(),
+      uf: this.athleteControl.get('uf')!.value!.toString(),
+      pais: this.athleteControl.get('pais')!.value!.toString(),
+      telefone:
+        this.athleteControl.get('telefone')!.value != null
+          ? this.athleteControl.get('telefone')!.value!.toString()
+          : '',
+      celular: this.athleteControl.get('celular')!.value!.toString(),
+      email: this.athleteControl.get('email')!.value!.toString(),
+      profissao:
+        this.athleteControl.get('profissao')!.value != null
+          ? this.athleteControl.get('profissao')!.value!.toString()
+          : '',
+      emergenciaContato: this.athleteControl
+        .get('emergenciaContato')!
+        .value!.toString(),
+      emergenciaFone:
+        this.athleteControl.get('emergenciaTelefone')!.value != null
+          ? this.athleteControl.get('emergenciaTelefone')!.value!.toString()
+          : '',
+      emergenciaCelular: this.athleteControl
+        .get('emergenciaCelular')!
+        .value!.toString(),
+      camisa: this.athleteControl.get('camisa')!.value!.toString(),
+      camisaCiclismo: this.athleteControl
+        .get('camisaCiclismo')!
+        .value!.toString(),
+      mktLojaPreferida:
+        this.athleteControl.get('mktLojaPreferida')!.value != null
+          ? this.athleteControl.get('mktLojaPreferida')!.value!.toString()
+          : '',
+      mktBikePreferida:
+        this.athleteControl.get('mktBikePreferida')!.value != null
+          ? this.athleteControl.get('mktBikePreferida')!.value!.toString()
+          : '',
+      mktAro:
+        this.athleteControl.get('mktAro')!.value != null
+          ? this.athleteControl.get('mktAro')!.value!.toString()
+          : '',
+      mktCambio:
+        this.athleteControl.get('mktCambio')!.value != null
+          ? this.athleteControl.get('mktCambio')!.value!.toString()
+          : '',
+      mktFreio:
+        this.athleteControl.get('mktFreio')!.value != null
+          ? this.athleteControl.get('mktFreio')!.value!.toString()
+          : '',
+      mktSuspensao:
+        this.athleteControl.get('mktSuspensao')!.value != null
+          ? this.athleteControl.get('mktSuspensao')!.value!.toString()
+          : '',
+      mktMarcaPneu:
+        this.athleteControl.get('mktMarcaPneu')!.value != null
+          ? this.athleteControl.get('mktMarcaPneu')!.value!.toString()
+          : '',
+      mktModeloPneu:
+        this.athleteControl.get('mktModeloPneu')!.value != null
+          ? this.athleteControl.get('mktModeloPneu')!.value!.toString()
+          : '',
+      mktTenis:
+        this.athleteControl.get('mktTenis')!.value != null
+          ? this.athleteControl.get('mktTenis')!.value!.toString()
+          : '',
+      federacao:
+        this.athleteControl.get('federacao')!.value != null
+          ? this.athleteControl.get('federacao')!.value!.toString()
+          : '',
+      cpf: this.athleteControl.get('cpf')!.value!.toString(),
+      rg: this.athleteControl.get('rg')!.value!.toString(),
+      ativo: true,
+    };
+
+    this.athleteService.updateAthlete(athleteUpdated).subscribe(
+      () => {
+        this.openSnackBar('Dados atualizados com sucesso,');
+      },
+      (error) => {
+        this.openSnackBar('Ocorreu um erro ao atualizar seus dados.');
+        console.log(error);
+      }
+    );
   }
 
   private loadEvent() {
@@ -82,13 +187,15 @@ export class AthleteRegisterComponent implements OnInit {
   }
 
   private findAthlete() {
-    this.athleteService.getAthleteById(this.idAthlete).subscribe((athlete) => {
-      this.athlete = athlete;
+    this.athleteService
+      .getAthleteByCpf(this.cpfAthlete)
+      .subscribe((athlete) => {
+        this.athlete = athlete;
 
-      if (this.athlete != null) {
-        this.loadAthlete();
-      }
-    });
+        if (this.athlete != null) {
+          this.loadAthlete();
+        }
+      });
   }
 
   private loadAthlete() {
@@ -97,6 +204,7 @@ export class AthleteRegisterComponent implements OnInit {
     this.athleteControl.get('sexo')?.setValue(this.athlete.sexo);
     this.athleteControl.get('responsavel')?.setValue(this.athlete.responsavel);
     this.athleteControl.get('endereco')?.setValue(this.athlete.endereco);
+    this.athleteControl.get('numero')?.setValue(this.athlete.numero);
     this.athleteControl.get('complemento')?.setValue(this.athlete.complemento);
     this.athleteControl.get('cep')?.setValue(this.athlete.cep);
     this.athleteControl.get('cidade')?.setValue(this.athlete.cidade);
@@ -140,5 +248,11 @@ export class AthleteRegisterComponent implements OnInit {
     this.athleteControl.get('mktTenis')?.setValue(this.athlete.mktTenis);
     this.athleteControl.get('cpf')?.setValue(this.athlete.cpf);
     this.athleteControl.get('rg')?.setValue(this.athlete.rg);
+  }
+
+  private openSnackBar(message: string) {
+    this.snackBar.open(message, 'OK', {
+      duration: 2000,
+    });
   }
 }

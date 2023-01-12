@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [AthleteRegisterComponent],
@@ -28,6 +30,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatStepperModule,
     MatIconModule,
     MatExpansionModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
   ],
 })
 export class AthletesModule {}

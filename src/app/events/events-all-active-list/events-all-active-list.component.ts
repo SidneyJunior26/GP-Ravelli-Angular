@@ -49,9 +49,12 @@ export class EventsAllActiveListComponent implements OnInit {
       return;
     }
 
+    cpf = cpf.replace('.', '').replace('.', '').replace('-', '');
+
     this.serviceAthlete.getAthleteByCpf(cpf).subscribe(
       (athlete) => {
         localStorage.setItem('cpf', cpf);
+        localStorage.setItem('eventId', eventId);
         this.dialog.open(LoginComponent);
       },
       (error) => {

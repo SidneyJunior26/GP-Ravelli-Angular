@@ -44,3 +44,21 @@ input {
   border: 1px solid gray;
   margin: 10px 0 10px 0;
 }
+
+.btnUpdate {
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 20px;
+}
+
+.btnUpdate mat-icon {
+  margin-right: 5px;
+}
+
+.infoIcon {
+  transform: scale(0.9);
+  font-size: 20px;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 16px;
+}

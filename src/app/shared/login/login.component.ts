@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AthletesService } from 'src/app/core/Athletes/athletes.service';
 
 @Component({
@@ -14,15 +15,24 @@ export class LoginComponent implements OnInit {
     private service: AthletesService,
     private dialogRef: MatDialogRef<LoginComponent>,
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
+
   athlete: any;
+  cpf: string;
+  password: string;
 
   ngOnInit(): void {
-    var cpf = localStorage.getItem('cpf');
+    this.cpf = localStorage
+      .getItem('cpf')!
+      .toString()
+      .replace('.', '')
+      .replace('.', '')
+      .replace('-', '');
 
-    if (cpf != null) {
-      this.loginControl.get('cpf')?.setValue(cpf);
+    if (this.cpf != null) {
+      this.loginControl.get('cpf')?.setValue(this.cpf);
       this.loginControl.get('password')?.setValue('');
       localStorage.removeItem('cpf');
     }
@@ -37,27 +47,44 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  findAthleteByCpf() {
-    const cpf = this.loginControl.get('cpf')?.value?.toString();
+  verifyAthlete() {
+    this.cpf =
+      this.loginControl.get('cpf')!.value != undefined
+        ? this.loginControl.get('cpf')!.value!.toString()
+        : '';
+    this.password =
+      this.loginControl.get('password')!.value != undefined
+        ? this.loginControl.get('password')!.value!.toString()
+        : '';
 
-    if (cpf == null || cpf == '') {
+    if (this.cpf == null || this.cpf == '') {
       this.openMessage('Informe seu CPF/CNPJ');
       return;
     }
 
-    this.service.getAthleteByCpf(cpf).subscribe(
-      (athlete) => {
-        console.log(athlete);
-      },
-      (error) => {
-        if (error.status == 404) this.openMessage('Usuário não encontrado');
-      }
-    );
+    this.findAthletheByCpf();
   }
 
   private openMessage(message: string) {
     this.snackBar.open(message, 'OK', {
       duration: 2000,
     });
+  }
+
+  private findAthletheByCpf() {
+    this.service.confirmAthlete(this.cpf, this.password).subscribe(
+      () => {
+        var eventId = localStorage.getItem('eventId');
+        localStorage.removeItem('eventId');
+        localStorage.setItem('cpf', this.cpf);
+
+        this.router.navigateByUrl('eventos/' + eventId);
+
+        this.dialogRef.close();
+      },
+      (error) => {
+        if (error.status == 404) this.openMessage('Senha inválida');
+      }
+    );
   }
 }

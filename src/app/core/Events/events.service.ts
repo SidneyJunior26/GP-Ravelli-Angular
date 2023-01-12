@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from 'src/app/shared/models/events';
 
-const url = 'http://localhost:5173/eventos/';
+const url = 'http://localhost:21991/eventos/';
 
 @Injectable({
   providedIn: 'root',

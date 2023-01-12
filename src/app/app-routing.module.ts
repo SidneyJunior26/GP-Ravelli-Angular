@@ -16,7 +16,7 @@ const routes: Routes = [
         component: AthleteRegisterComponent,
       },
       {
-        path: ':idEvent/:idAthlete',
+        path: ':idEvent',
         component: AthleteRegisterComponent,
       },
     ],

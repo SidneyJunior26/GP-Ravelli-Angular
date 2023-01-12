@@ -17,7 +17,7 @@ export interface Athlete {
   emergenciaContato: string;
   emergenciaFone: string;
   emergenciaCelular: string;
-  dataCadastro: string;
+  dataCadastro?: string;
   camisa: string;
   camisaCiclismo: string;
   mktLojaPreferida: string;
@@ -29,7 +29,7 @@ export interface Athlete {
   mktMarcaPneu: string;
   mktModeloPneu: string;
   mktTenis: string;
-  acesso: string;
+  acesso?: string;
   ativo: true;
   federacao: string;
   cpf: string;
