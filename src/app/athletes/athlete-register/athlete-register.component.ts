@@ -69,12 +69,13 @@ export class AthleteRegisterComponent implements OnInit {
   ngOnInit(): void {
     this.idEvent = this.activatedRoute.snapshot.params['idEvent'];
 
-    if (localStorage.getItem('cpf') != null) {
-      this.cpfAthlete = localStorage.getItem('cpf')!;
-      localStorage.removeItem('cpf');
-    }
+    const token = localStorage.getItem('currentUser');
 
-    if (this.cpfAthlete != null) {
+    if (token != null)
+      var userInfo = this.athleteService.getDecodedAccessToken(token);
+
+    if (userInfo != null) {
+      this.cpfAthlete = userInfo.ID;
       this.findAthlete();
     }
 

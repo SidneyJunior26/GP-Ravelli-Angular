@@ -18,7 +18,7 @@ export class EventsAllActiveListComponent implements OnInit {
   constructor(
     private service: EventsService,
     private snackBar: MatSnackBar,
-    private serviceAthlete: AthletesService,
+    private athleteService: AthletesService,
     private router: Router,
     private dialog: MatDialog
   ) {}
@@ -38,7 +38,16 @@ export class EventsAllActiveListComponent implements OnInit {
       .subscribe((events) => this.eventsOpen.push(...events));
   }
 
-  changeView(): void {
+  changeView(eventId: string): void {
+    const token = localStorage.getItem('currentUser');
+
+    if (token != null)
+      var userInfo = this.athleteService.getDecodedAccessToken(token);
+
+    if (userInfo != null) {
+      this.router.navigateByUrl('eventos/' + eventId);
+    }
+
     if (this.btnVisible) this.btnVisible = false;
     else this.btnVisible = true;
   }
@@ -51,9 +60,8 @@ export class EventsAllActiveListComponent implements OnInit {
 
     cpf = cpf.replace('.', '').replace('.', '').replace('-', '');
 
-    this.serviceAthlete.getAthleteByCpf(cpf).subscribe(
+    this.athleteService.getAthleteByCpf(cpf).subscribe(
       (athlete) => {
-        localStorage.setItem('cpf', cpf);
         localStorage.setItem('eventId', eventId);
         this.dialog.open(LoginComponent);
       },

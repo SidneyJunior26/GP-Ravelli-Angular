@@ -72,18 +72,22 @@ export class LoginComponent implements OnInit {
   }
 
   private findAthletheByCpf() {
-    this.service.confirmAthlete(this.cpf, this.password).subscribe(
+    this.service.login(this.cpf, this.password).subscribe(
       () => {
         var eventId = localStorage.getItem('eventId');
         localStorage.removeItem('eventId');
-        localStorage.setItem('cpf', this.cpf);
 
         this.router.navigateByUrl('eventos/' + eventId);
 
         this.dialogRef.close();
       },
       (error) => {
-        if (error.status == 404) this.openMessage('Senha inválida');
+        if (error.status == 404) {
+          this.openMessage('Usuário não encontrado');
+        }
+        if (error.status == 401) {
+          this.openMessage('Senha inválida');
+        }
       }
     );
   }

@@ -21,7 +21,7 @@
           <div *ngIf="btnVisible" class="divSubscribe">
             <button
               class="btnSubscribe"
-              (click)="changeView()"
+              (click)="changeView(eventOpen.id)"
               *ngIf="btnVisible"
             >
               Inscreva-se Aqui
@@ -45,7 +45,7 @@
             <button
               class="btnCancel"
               *ngIf="!btnVisible"
-              (click)="changeView()"
+              (click)="changeView(eventOpen.id)"
             >
               Cancelar
             </button>
