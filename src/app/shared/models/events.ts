@@ -1,4 +1,5 @@
 export interface Event {
+  [key: string]: any;
   id: number;
   nome: string;
   descricao: string;

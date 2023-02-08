@@ -2,19 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Athlete } from 'src/app/shared/models/athlete';
-import jwtDecode from 'jwt-decode';
+import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:21991/atletas/';
+const url = 'http://localhost:3031/athletes/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AthletesService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private securityService: SecurityService
+  ) {}
 
   // GET
+  verifyIfUserExists(cpf: string): Observable<any> {
+    return this.http.get<any[]>(url + 'exists/' + cpf);
+  }
+
   getAthleteByCpf(cpf: string): Observable<any> {
-    return this.http.get<any[]>(url + cpf);
+    const headers = this.securityService.getAuthentiaction();
+
+    return this.http.get<any[]>(url + cpf, {
+      headers: headers,
+    });
   }
 
   getAthleteById(id: string): Observable<any> {
@@ -28,10 +39,8 @@ export class AthletesService {
         password: password,
       })
       .pipe(
-        map((user) => {
-          localStorage.removeItem('currentUser');
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          return user;
+        map((token) => {
+          return JSON.stringify(token);
         })
       );
   }
@@ -43,14 +52,11 @@ export class AthletesService {
 
   // UPDATE
   updateAthlete(athlete: Athlete): Observable<Athlete> {
-    return this.http.put<Athlete>(url + athlete.cpf, athlete);
-  }
+    const token = this.securityService.getToken();
+    const headers = this.securityService.getDecodedAccessToken(token);
 
-  getDecodedAccessToken(token: string): any {
-    try {
-      return jwtDecode(token);
-    } catch (Error) {
-      return null;
-    }
+    return this.http.put<Athlete>(url + athlete.cpf, athlete, {
+      headers: headers,
+    });
   }
 }

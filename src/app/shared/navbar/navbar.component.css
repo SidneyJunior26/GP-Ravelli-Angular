@@ -1,13 +1,50 @@
-.logo {
+.toolbar {
   box-shadow: -2px 3px 7px 2px #141211;
-  padding: 100px 0 120px 0;
-  background-color: rgba(31, 20, 16, 255);
+  background-color: #212121;
+  height: auto;
+  display: grid;
+}
+
+.functions {
+  padding: 10px 0 10px 5px;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+.options {
+  width: 100%;
+}
+
+.logoMenu {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-height: 200px;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.logoMain {
+  display: flex;
+  justify-content: center;
+}
+
+.btnOption {
+  width: 100%;
+}
+
+.btnMenu {
+  width: auto;
+}
+
+.btnUser {
+  width: auto;
+}
+
+.drawer {
+  padding: 10px 0 0 0;
+  width: 250px;
 }
 
 img {
-  max-height: 200px;
+  width: 300px;
+  height: auto;
 }

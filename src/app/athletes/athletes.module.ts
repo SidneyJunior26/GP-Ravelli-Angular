@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AthleteRegisterComponent } from './athlete-register/athlete-register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,9 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { EventRegisterComponent } from '../events/event-register/event-register.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [AthleteRegisterComponent],
+  declarations: [EventRegisterComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -32,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatExpansionModule,
     BrowserAnimationsModule,
     MatTooltipModule,
+    MatCheckboxModule,
   ],
 })
 export class AthletesModule {}

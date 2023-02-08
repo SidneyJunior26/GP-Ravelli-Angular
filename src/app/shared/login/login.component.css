@@ -12,3 +12,7 @@ input::-webkit-inner-spin-button {
 mat-form-field {
   width: 100%;
 }
+
+a {
+  color: #f9a826;
+}

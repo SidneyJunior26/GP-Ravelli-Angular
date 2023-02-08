@@ -1,0 +1,137 @@
+section {
+  color: white;
+  width: 100%;
+  min-height: 1000px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  color: white;
+}
+
+input {
+  color: white;
+}
+
+mat-tab-group {
+  margin-top: 20px;
+  width: 90%;
+}
+
+mat-radio-button {
+  padding-bottom: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.form-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.menu {
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.container {
+  height: auto;
+  margin: 0 0 40px 0;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.event-main-info {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.info-lateral {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagem {
+  width: 20%;
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.rblGenre {
+  margin-top: 15px;
+  color: white;
+}
+
+.vl {
+  width: 100%;
+  border: 1px solid gray;
+  margin: 10px 0 10px 0;
+}
+
+.btnUpdate {
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 20px;
+}
+
+.btnUpdate mat-icon {
+  margin-right: 5px;
+}
+
+.infoIcon {
+  transform: scale(0.9);
+  font-size: 20px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin-left: 20px;
+}
+
+.divPlano {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.subscribe-on {
+  color: #61dda0;
+}
+
+.button-add {
+  background-color: #61dda0 !important;
+  color: black;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 16px;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

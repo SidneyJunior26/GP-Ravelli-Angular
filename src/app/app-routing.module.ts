@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AthleteRegisterComponent } from './athletes/athlete-register/athlete-register.component';
+import { EventRegisterComponent } from './events/event-register/event-register.component';
 import { EventsAllActiveListComponent } from './events/events-all-active-list/events-all-active-list.component';
+import { EventsManagerComponent } from './manager/events-manager/events-manager.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,20 @@ const routes: Routes = [
     children: [
       {
         path: ':idEvent',
-        component: AthleteRegisterComponent,
+        component: EventRegisterComponent,
       },
       {
         path: ':idEvent',
-        component: AthleteRegisterComponent,
+        component: EventRegisterComponent,
+      },
+    ],
+  },
+  {
+    path: 'manager',
+    children: [
+      {
+        path: 'eventos',
+        component: EventsManagerComponent,
       },
     ],
   },

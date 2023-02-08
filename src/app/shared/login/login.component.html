@@ -4,16 +4,31 @@
 </div>
 <div mat-dialog-content>
   <div mat-dialog-content [formGroup]="loginControl" class="form-fields">
-    <mat-form-field class="input" appearance="fill">
+    <mat-form-field class="input" appearance="fill" color="accent">
       <mat-label>CPf/CNPJ</mat-label>
       <input matInput type="number" formControlName="cpf" required />
     </mat-form-field>
-    <mat-form-field class="input" appearance="fill">
+    <mat-form-field class="input" appearance="fill" color="accent">
       <mat-label>Senha</mat-label>
-      <input matInput type="password" formControlName="password" required />
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
     </mat-form-field>
   </div>
 </div>
+<a href="">Esqueceu sua senha?</a>
 <div mat-dialog-actions>
   <button
     mat-raised-button

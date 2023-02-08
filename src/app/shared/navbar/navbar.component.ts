@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { SecurityService } from 'src/app/core/Security/security.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,17 +10,24 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   userIsLoggedIn = false;
+  userName: string;
 
-  constructor(public dialog: MatDialog, public router: Router) {}
+  constructor(
+    private dialog: MatDialog,
+    private securityService: SecurityService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('currentUser') != null) {
+      const token = localStorage.getItem('currentUser')!;
+      let userInfo = this.securityService.getDecodedAccessToken(token);
 
-  viewUser(): void {
-    //this.router.navigateByUrl('/user/' + this.userId);
+      this.userName = userInfo.Name;
+    }
   }
 
-  registerUser(): void {
-    this.router.navigateByUrl('/register');
+  login() {
+    this.dialog.open(LoginComponent);
   }
 
   onActivate() {
@@ -28,5 +36,23 @@ export class NavbarComponent implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
+  }
+
+  checkLogIn() {
+    var token = localStorage.getItem('currentUser');
+
+    if (token != null) {
+      var userInfo = this.securityService.getDecodedAccessToken(token);
+
+      this.userName = userInfo.Name;
+    }
+
+    this.userIsLoggedIn = token != null;
+  }
+
+  logOut() {
+    localStorage.removeItem('currentUser');
+
+    window.location.reload();
   }
 }

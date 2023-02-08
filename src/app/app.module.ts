@@ -13,6 +13,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AthletesModule } from './athletes/athletes.module';
+import { ManagerModule } from './manager/manager.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, LoginComponent],
@@ -23,6 +24,7 @@ import { AthletesModule } from './athletes/athletes.module';
     MaterialModule,
     EventsModule,
     AthletesModule,
+    ManagerModule,
     HttpClientModule,
     MatFormFieldModule,
     ReactiveFormsModule,

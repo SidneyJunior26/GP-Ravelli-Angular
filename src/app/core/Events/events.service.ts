@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from 'src/app/shared/models/events';
 
-const url = 'http://localhost:21991/eventos/';
+const url = 'http://localhost:3031/eventos/';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +11,23 @@ const url = 'http://localhost:21991/eventos/';
 export class EventsService {
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<Event[]> {
+  getAllEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(url);
+  }
+
+  getEventsComing(): Observable<Event[]> {
+    return this.http.get<Event[]>(url + 'coming');
   }
 
   getEventsActives(): Observable<Event[]> {
     return this.http.get<Event[]>(url + 'true/true');
   }
 
-  getEventById(id: string): Observable<Event> {
+  getEventById(id: number): Observable<Event> {
     return this.http.get<Event>(url + id);
+  }
+
+  deleteEventById(id: number) {
+    return this.http.delete(url + id);
   }
 }

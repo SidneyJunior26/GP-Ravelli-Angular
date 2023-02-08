@@ -1,6 +1,119 @@
-<mat-toolbar class="logo" id="toolbarLogo">
-  <img src="../../../assets/Images/Logo-img.jpeg" alt="" width="200px" />
-</mat-toolbar>
-<div class="app-content">
-  <router-outlet (activate)="onActivate()"></router-outlet>
-</div>
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer class="drawer">
+    <div class="options">
+      <div class="close">
+        <button mat-button (click)="drawer.toggle()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div class="logoMenu">
+        <img src="../../../assets/Images/Logo2-img.png" alt="" />
+      </div>
+      <div>
+        <button
+          mat-button
+          class="btnOption"
+          (click)="drawer.toggle()"
+          routerLink="/"
+        >
+          <mat-icon>home</mat-icon>
+          Início
+        </button>
+        <button
+          mat-button
+          class="btnOption"
+          (click)="drawer.toggle()"
+          routerLink="/manager/eventos"
+          color="accent"
+          *ngIf="userName"
+        >
+          <mat-icon>supervised_user_circle</mat-icon>
+          Painel Administrativo
+        </button>
+        <button
+          mat-button
+          class="btnOption"
+          *ngIf="!userName"
+          (click)="login()"
+        >
+          <mat-icon>perm_identity</mat-icon>
+          Acessar
+        </button>
+        <button
+          mat-button
+          class="btnOption"
+          style="color: white"
+          *ngIf="userName"
+        >
+          <mat-icon>person</mat-icon>
+          Meus Dados
+        </button>
+      </div>
+      <div>
+        <button
+          mat-button
+          color="warn"
+          class="btnOption"
+          *ngIf="userName"
+          (click)="logOut()"
+        >
+          <mat-icon>exit_to_app</mat-icon>
+          Sair
+        </button>
+      </div>
+    </div></mat-drawer
+  >
+  <mat-drawer-content>
+    <mat-toolbar class="toolbar" id="toolbarLogo">
+      <div class="functions">
+        <div>
+          <button mat-button class="btnMenu" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+            Menu
+          </button>
+        </div>
+        <div class="logoMain">
+          <img src="../../../assets/Images/Logo2-img.png" alt="" />
+        </div>
+        <div>
+          <button
+            mat-button
+            class="btnOption"
+            *ngIf="!userName"
+            (click)="login()"
+          >
+            <mat-icon>perm_identity</mat-icon>
+            Acessar
+          </button>
+          <button
+            mat-button
+            [matMenuTriggerFor]="menu"
+            class="btnUser"
+            *ngIf="userName"
+          >
+            <u>{{ userName }}</u>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-button class="btnOption" style="color: white">
+              <mat-icon>person</mat-icon>
+              Meus Dados
+            </button>
+            <button
+              mat-button
+              color="warn"
+              class="btnOption"
+              *ngIf="userName"
+              (click)="logOut()"
+            >
+              <mat-icon>exit_to_app</mat-icon>
+              Sair
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-toolbar>
+    <div class="app-content">
+      <router-outlet (activate)="onActivate()"></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

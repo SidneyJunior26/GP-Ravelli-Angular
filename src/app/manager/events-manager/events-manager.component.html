@@ -1,0 +1,439 @@
+<section>
+  <mat-tab-group #tabgroup color="accent" mat-align-tabs="center">
+    <mat-tab label="Eventos">
+      <div class="container">
+        <div class="buttons">
+          <button mat-raised-button class="button-add" (click)="newEvent()">
+            <mat-icon>add</mat-icon>
+            <span>Novo Evento</span>
+          </button>
+          <button mat-raised-button class="button-add" (click)="loadCategory()">
+            <mat-icon>add</mat-icon>
+            <span>Nova Categoria</span>
+          </button>
+          <button
+            mat-raised-button
+            class="button-add"
+            (click)="loadRegulamento()"
+          >
+            <mat-icon>add</mat-icon>
+            <span>Novo Regulamento</span>
+          </button>
+        </div>
+        <table mat-table [dataSource]="dsEvents" style="width: 100%">
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let events">
+              <button
+                mat-icon-button
+                matTooltip="Inscrições Abertas"
+                *ngIf="events.ativaInscricao == 1 && events.ativaEvento == 1"
+                class="subscribe-on"
+              >
+                <mat-icon>done_all</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Evento Aberto com Inscrições Fechadas"
+                *ngIf="events.ativaInscricao == 0 && events.ativaEvento == 1"
+                color="accent"
+              >
+                <mat-icon>done</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Inscrições Abertas e Evento Fechado"
+                *ngIf="events.ativaInscricao == 1 && events.ativaEvento == 0"
+                color="primary"
+              >
+                <mat-icon>help</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Inscrições Fechadas"
+                *ngIf="events.ativaInscricao == 0 && events.ativaEvento == 0"
+                color="warn"
+              >
+                <mat-icon>highlight_off</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="deletar">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              Excluir
+            </th>
+            <td mat-cell *matCellDef="let events" class="text-center">
+              <button
+                mat-stroked-button
+                color="warn"
+                (click)="deleteEvent(events.id)"
+              >
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              Editar
+            </th>
+            <td mat-cell *matCellDef="let events" class="text-center">
+              <button
+                mat-stroked-button
+                color="accent"
+                (click)="editEvent(events.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="categorias">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              Categorias
+            </th>
+            <td mat-cell *matCellDef="let events" class="text-center">
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="loadCategory()"
+              >
+                <mat-icon>receipt</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="regulamento">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              Regulamento
+            </th>
+            <td mat-cell *matCellDef="let events" class="text-center">
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="loadRegulamento()"
+              >
+                <mat-icon>assignment</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="nome" color="accent">
+            <th mat-header-cell *matHeaderCellDef>Nome</th>
+            <td mat-cell *matCellDef="let events">{{ events.nome }}</td>
+          </ng-container>
+          <ng-container matColumnDef="data" color="accent">
+            <th mat-header-cell *matHeaderCellDef>Data</th>
+            <td mat-cell *matCellDef="let events">
+              {{ events.data | date : "dd MMMM yyyy" }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          #paginator
+          [length]="100"
+          pageSize="10"
+          showFirstLastButtons
+          [hidePageSize]="true"
+          aria-label="Select page"
+        >
+        </mat-paginator></div
+    ></mat-tab>
+    <mat-tab label="Cadastro de Evento">
+      <div class="container">
+        <div mat-dialog-content [formGroup]="eventControl" class="form-fields">
+          <h1>Informações Principais</h1>
+          <div class="event-main-info">
+            <img
+              class="imagem"
+              src="../../../assets/Images/149.jpeg"
+              alt=""
+              width="90%"
+            />
+            <div class="info-lateral">
+              <div class="nome">
+                <mat-form-field
+                  appearance="outline"
+                  color="accent"
+                  style="width: 100%"
+                >
+                  <mat-label>Nome</mat-label>
+                  <input matInput formControlName="nome" />
+                </mat-form-field>
+              </div>
+              <div class="descricao">
+                <mat-form-field
+                  appearance="outline"
+                  color="accent"
+                  class="descricao"
+                  style="width: 100%"
+                >
+                  <mat-label>Descrição</mat-label>
+                  <input matInput formControlName="descricao" />
+                </mat-form-field>
+              </div>
+              <div class="local">
+                <mat-form-field
+                  appearance="outline"
+                  color="accent"
+                  style="width: 100%"
+                >
+                  <mat-label>Local</mat-label>
+                  <input matInput formControlName="local" />
+                </mat-form-field>
+              </div>
+              <div class="data">
+                <mat-form-field appearance="outline" color="accent">
+                  <mat-label>Data do Evento</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="data"
+                    formControlName="data"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="data"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #data></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="vl"></div>
+          <h1 style="width: 100%">Inscrições</h1>
+          <div style="width: 100%" class="item">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              style="width: 20%"
+            >
+              <mat-label>Data de Início das Incrições</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dataIniInscricao"
+                formControlName="dataIniInscricao"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dataIniInscricao"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dataIniInscricao></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              style="width: 20%"
+            >
+              <mat-label>Data Final das Incrições</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dataFimInscricao"
+                formControlName="dataFimInscricao"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dataFimInscricao"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dataFimInscricao></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="vl"></div>
+          <div style="width: 100%">
+            <h1>Valores</h1>
+          </div>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 20%"
+          >
+            <mat-label>Data Desconto</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dataDesconto"
+              formControlName="dataDesconto"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dataDesconto"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dataDesconto></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 20%"
+          >
+            <mat-label>Data Valor Normal</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dataValorNormal"
+              formControlName="dataValorNormal"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dataValorNormal"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dataValorNormal></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Valor 1</mat-label>
+            <input matInput formControlName="valor1" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Valor 2</mat-label>
+            <input matInput formControlName="valor2" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Valor Normal</mat-label>
+            <input matInput formControlName="valorNormal" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 2 Valor 1</mat-label>
+            <input matInput formControlName="pacote2V1" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 2 Valor 2</mat-label>
+            <input matInput formControlName="pacote2V2" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 2 Valor 3</mat-label>
+            <input matInput formControlName="pacote2V3" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 3 Valor 1</mat-label>
+            <input matInput formControlName="pacote3V1" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 3 Valor 2</mat-label>
+            <input matInput formControlName="pacote3V2" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 3 Valor 3</mat-label>
+            <input matInput formControlName="pacote3V3" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 4 Valor 1</mat-label>
+            <input matInput formControlName="pacote4V1" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 4 Valor 2</mat-label>
+            <input matInput formControlName="pacote4V2" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 4 Valor 3</mat-label>
+            <input matInput formControlName="pacote4V3" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 1 Descrição</mat-label>
+            <input matInput formControlName="pacote1Desc" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 2 Descrição</mat-label>
+            <input matInput formControlName="pacote2Desc" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 3 Descrição</mat-label>
+            <input matInput formControlName="pacote3Desc" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 4 Descrição</mat-label>
+            <input
+              placeholder="Pacote 4 Descrição"
+              matInput
+              formControlName="pacote4Desc"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 1 Ativo</mat-label>
+            <input matInput formControlName="pacote1Ativo" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 2 Ativo</mat-label>
+            <input matInput formControlName="pacote2Ativo" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 3 Ativo</mat-label>
+            <input matInput formControlName="pacote3Ativo" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Pacote 4 Ativo</mat-label>
+            <input matInput formControlName="pacote4Ativo" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="categoria" />
+            <mat-error
+              *ngIf="eventControl.get('categoria')?.hasError('required')"
+            >
+              Campo obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Boleto Inf 1</mat-label>
+            <input matInput formControlName="boletoInf1" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Boleto Inf 2</mat-label>
+            <input matInput formControlName="boletoInf2" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Boleto Inf 3</mat-label>
+            <input matInput formControlName="boletoInf3" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Boleto Instrução 1</mat-label>
+            <input matInput formControlName="boletoInstrucao1" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Boleto Instrução 2</mat-label>
+            <input matInput formControlName="boletoInstrucao2" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Boleto Instrução 3</mat-label>
+            <input matInput formControlName="boletoInstrucao3" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Observações na Tela</mat-label>
+            <input matInput formControlName="obsTela" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>E-mail de Cadastro</mat-label>
+            <input matInput formControlName="txtEmailCadastro" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Categorias">
+      <div class="container"></div>
+    </mat-tab>
+    <mat-tab label="Regulamentos">
+      <div class="container"></div>
+    </mat-tab>
+  </mat-tab-group>
+</section>

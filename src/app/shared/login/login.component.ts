@@ -22,14 +22,16 @@ export class LoginComponent implements OnInit {
   athlete: any;
   cpf: string;
   password: string;
+  hide = true;
 
   ngOnInit(): void {
-    this.cpf = localStorage
-      .getItem('cpf')!
-      .toString()
-      .replace('.', '')
-      .replace('.', '')
-      .replace('-', '');
+    if (localStorage.getItem('cpf')) {
+      this.cpf = localStorage
+        .getItem('cpf')!
+        .replace('.', '')
+        .replace('.', '')
+        .replace('-', '');
+    }
 
     if (this.cpf != null) {
       this.loginControl.get('cpf')?.setValue(this.cpf);
@@ -39,8 +41,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginControl = this.formBuilder.group({
-    cpf: new FormControl('cpf', Validators.required),
-    password: new FormControl('password', Validators.required),
+    cpf: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
 
   close() {
@@ -73,11 +75,17 @@ export class LoginComponent implements OnInit {
 
   private findAthletheByCpf() {
     this.service.login(this.cpf, this.password).subscribe(
-      () => {
+      (token) => {
         var eventId = localStorage.getItem('eventId');
         localStorage.removeItem('eventId');
+        localStorage.setItem('currentUser', token);
 
-        this.router.navigateByUrl('eventos/' + eventId);
+        this.loginControl.get('cpf')!.setValue('');
+        this.loginControl.get('password')!.setValue('');
+
+        if (eventId != null) {
+          this.router.navigateByUrl('eventos/' + eventId);
+        }
 
         this.dialogRef.close();
       },
