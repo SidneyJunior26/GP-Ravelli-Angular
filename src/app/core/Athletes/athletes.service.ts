@@ -4,7 +4,8 @@ import { map, Observable } from 'rxjs';
 import { Athlete } from 'src/app/shared/models/athlete';
 import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:3031/athletes/';
+const url = 'http://localhost:3031/v1/atletas/';
+const securityUrl = 'http://localhost:3031/v1/seguranca/';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class AthletesService {
 
   // GET
   verifyIfUserExists(cpf: string): Observable<any> {
-    return this.http.get<any[]>(url + 'exists/' + cpf);
+    return this.http.get<any[]>(url + 'existe/' + cpf);
   }
 
   getAthleteByCpf(cpf: string): Observable<any> {
@@ -34,7 +35,7 @@ export class AthletesService {
 
   login(cpf: string, password: string): Observable<any> {
     return this.http
-      .post<any>(url + 'login', {
+      .post<any>(securityUrl + 'login', {
         cpf: cpf,
         password: password,
       })
