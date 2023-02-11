@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from 'src/app/shared/models/events';
 
-const url = 'http://localhost:3031/eventos/';
+const url = 'http://localhost:3031/v1/Eventos/';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class EventsService {
   }
 
   getEventsComing(): Observable<Event[]> {
-    return this.http.get<Event[]>(url + 'coming');
+    return this.http.get<Event[]>(url + 'proximos');
   }
 
   getEventsActives(): Observable<Event[]> {

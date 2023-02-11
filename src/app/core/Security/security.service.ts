@@ -37,7 +37,7 @@ export class SecurityService {
     if (this.getToken() != '')
       return new HttpHeaders().set(
         'Authorization',
-        'bearer ' + JSON.parse(this.getToken()).token
+        'Bearer ' + JSON.parse(this.getToken()).token
       );
     else return new HttpHeaders();
   }

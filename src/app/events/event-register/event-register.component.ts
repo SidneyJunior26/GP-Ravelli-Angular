@@ -297,8 +297,6 @@ export class EventRegisterComponent implements OnInit {
       categories.forEach((item) => {
         this.categorieList.push(item);
       });
-
-      this.categorieList.splice(this.categorieList.length - 1, 1);
     });
   }
 

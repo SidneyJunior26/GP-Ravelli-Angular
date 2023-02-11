@@ -4,8 +4,8 @@ import { map, Observable } from 'rxjs';
 import { Athlete } from 'src/app/shared/models/athlete';
 import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:3031/v1/atletas/';
-const securityUrl = 'http://localhost:3031/v1/seguranca/';
+const url = 'http://localhost:3031/v1/Atletas/';
+const securityUrl = 'http://localhost:3031/v1/Seguranca/';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class AthletesService {
   getAthleteByCpf(cpf: string): Observable<any> {
     const headers = this.securityService.getAuthentiaction();
 
-    return this.http.get<any[]>(url + cpf, {
+    return this.http.get<any[]>(url + 'consultar/' + cpf, {
       headers: headers,
     });
   }
