@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Subcategory } from 'src/app/shared/models/subcategory';
 import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:3031/v1/SubCategoria/';
+const url = 'https://localhost:3031/v1/SubCategoria/';
 
 @Injectable({
   providedIn: 'root',

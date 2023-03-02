@@ -32,13 +32,13 @@ export class EventsAllActiveListComponent implements OnInit {
 
   private listEvents() {
     this.service
-      .getEventsComing()
+      .consultarProximosEventos()
       .subscribe((events) => this.events.push(...events));
   }
 
   private listEventsOpen() {
     this.service
-      .getEventsActives()
+      .consultarEventosAtivos()
       .subscribe((events) => this.eventsOpen.push(...events));
   }
 

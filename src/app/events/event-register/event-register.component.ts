@@ -12,8 +12,8 @@ import { SecurityService } from 'src/app/core/Security/security.service';
 import { ExternalService } from 'src/app/core/Shared/external.service';
 import { SubcategoriesService } from 'src/app/core/Subcategories/subcategories.service';
 import { LoginComponent } from 'src/app/shared/login/login.component';
-import { Athlete } from 'src/app/shared/models/athlete';
-import { Event } from 'src/app/shared/models/events';
+import { Atleta } from 'src/app/shared/models/athlete';
+import { Evento } from 'src/app/shared/models/events';
 import { MedicalRecord } from 'src/app/shared/models/medicalRecord';
 import { Regulation } from 'src/app/shared/models/regulation';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
@@ -27,8 +27,8 @@ export class EventRegisterComponent implements OnInit {
   eventId: number;
   cpfAthlete: string;
   athleteId: string;
-  event: Event;
-  athlete: Athlete;
+  event: Evento;
+  atleta: Atleta;
   regulation: Regulation;
   medicalRecords: MedicalRecord;
   categorySelected = false;
@@ -145,7 +145,7 @@ export class EventRegisterComponent implements OnInit {
   }
 
   updateAthlete(): void {
-    const athleteUpdated: Athlete = {
+    const athleteUpdated: Atleta = {
       nome: this.athleteControl.get('nome')!.value!.toString(),
       nascimento: this.athleteControl.get('nascimento')!.value!.toString(),
       sexo: this.athleteControl.get('sexo')!.value!.toString(),
@@ -277,7 +277,7 @@ export class EventRegisterComponent implements OnInit {
 
     if (cep.length < 8) return;
 
-    this.externalServices.getAdressByCEP(cep).subscribe((adress) => {
+    this.externalServices.consultarEndereçoPorCEP(cep).subscribe((adress) => {
       this.athleteControl.get('endereco')?.setValue(adress.logradouro);
       this.athleteControl.get('cidade')?.setValue(adress.localidade);
       this.athleteControl.get('uf')?.setValue(adress.uf);
@@ -289,7 +289,7 @@ export class EventRegisterComponent implements OnInit {
   }
 
   private loadEvent() {
-    this.eventService.getEventById(this.eventId).subscribe((event) => {
+    this.eventService.ConsultarEventoPeloId(this.eventId).subscribe((event) => {
       this.event = event;
 
       const categories = this.event.categoria.split(';');
@@ -309,11 +309,11 @@ export class EventRegisterComponent implements OnInit {
   }
 
   private findAthlete() {
-    this.athleteService.getAthleteByCpf(this.cpfAthlete).subscribe(
+    this.athleteService.consultarAtletaPorCPF(this.cpfAthlete).subscribe(
       (athlete) => {
-        this.athlete = athlete;
+        this.atleta = athlete;
 
-        if (this.athlete != null) {
+        if (this.atleta != null) {
           this.loadAthlete();
         }
       },
@@ -329,9 +329,9 @@ export class EventRegisterComponent implements OnInit {
   }
 
   private loadAthlete() {
-    for (const key in this.athlete) {
+    for (const key in this.atleta) {
       if (this.athleteControl.get(key)) {
-        this.athleteControl.get(key)?.setValue(this.athlete[key]);
+        this.athleteControl.get(key)?.setValue(this.atleta[key]);
       }
     }
   }

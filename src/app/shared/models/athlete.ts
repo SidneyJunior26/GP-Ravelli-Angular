@@ -1,4 +1,4 @@
-export interface Athlete {
+export interface Atleta {
   [key: string]: any;
   nome: string;
   nascimento: string;

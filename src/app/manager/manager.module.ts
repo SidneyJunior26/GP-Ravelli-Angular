@@ -12,9 +12,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { LoginManagerComponent } from './login-manager/login-manager.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { ImageUploadComponent } from '../shared/image-upload/image-upload.component';
 
 @NgModule({
-  declarations: [EventsManagerComponent],
+  declarations: [
+    EventsManagerComponent,
+    LoginManagerComponent,
+    ImageUploadComponent,
+  ],
   imports: [
     CommonModule,
     MatStepperModule,
@@ -28,6 +37,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTooltipModule,
     MatPaginatorModule,
     MatDatepickerModule,
+    MatSortModule,
+    MatRadioModule,
+    MatSelectModule,
   ],
 })
 export class ManagerModule {}

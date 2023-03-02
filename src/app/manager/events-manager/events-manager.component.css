@@ -71,7 +71,7 @@ mat-radio-button {
   gap: 10px;
 }
 
-.buttons {
+.pnl-buttons {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;

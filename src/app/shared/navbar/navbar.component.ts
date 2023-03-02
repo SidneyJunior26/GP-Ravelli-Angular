@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { SecurityService } from 'src/app/core/Security/security.service';
 import { LoginComponent } from '../login/login.component';
 
@@ -14,16 +15,12 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private securityService: SecurityService
+    private securityService: SecurityService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('currentUser') != null) {
-      const token = localStorage.getItem('currentUser')!;
-      let userInfo = this.securityService.getDecodedAccessToken(token);
-
-      this.userName = userInfo.Name;
-    }
+    this.checkLogIn();
   }
 
   login() {
@@ -39,12 +36,15 @@ export class NavbarComponent implements OnInit {
   }
 
   checkLogIn() {
-    var token = localStorage.getItem('currentUser');
+    var token = this.securityService.getToken();
 
     if (token != null) {
       var userInfo = this.securityService.getDecodedAccessToken(token);
 
       this.userName = userInfo.Name;
+    } else {
+      this.logOut();
+      this.router.navigateByUrl('/');
     }
 
     this.userIsLoggedIn = token != null;

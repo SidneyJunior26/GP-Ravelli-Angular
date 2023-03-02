@@ -1,4 +1,4 @@
-export interface Event {
+export interface Evento {
   [key: string]: any;
   id: number;
   nome: string;

@@ -10,7 +10,7 @@ const url = 'https://viacep.com.br/ws/CEP/json/';
 export class ExternalService {
   constructor(private http: HttpClient) {}
 
-  getAdressByCEP(cep: string): Observable<any> {
+  consultarEndereçoPorCEP(cep: string): Observable<any> {
     return this.http.get<any>(url.replace('CEP', cep));
   }
 }

@@ -47,6 +47,7 @@ mat-card-content {
   justify-content: space-around;
   align-items: baseline;
   height: auto;
+  min-height: 500px;
 }
 
 .header {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Regulation } from 'src/app/shared/models/regulation';
 import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:3031/v1/regulamentos/';
+const url = 'https://localhost:3031/v1/regulamentos/';
 
 @Injectable({
   providedIn: 'root',

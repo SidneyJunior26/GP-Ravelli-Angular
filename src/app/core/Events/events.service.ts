@@ -1,33 +1,48 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event } from 'src/app/shared/models/events';
+import { Evento } from 'src/app/shared/models/events';
+import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:3031/v1/Eventos/';
+const url = 'https://localhost:3031/v1/eventos/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventsService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private securityService: SecurityService
+  ) {}
 
-  getAllEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(url);
+  /* GET */
+  consultarTodosEventos(): Observable<Evento[]> {
+    const headers = this.securityService.getAuthentiaction();
+
+    return this.http.get<Evento[]>(url, {
+      headers: headers,
+    });
   }
 
-  getEventsComing(): Observable<Event[]> {
-    return this.http.get<Event[]>(url + 'proximos');
+  consultarProximosEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(url + 'proximos');
   }
 
-  getEventsActives(): Observable<Event[]> {
-    return this.http.get<Event[]>(url + 'true/true');
+  consultarEventosAtivos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(url + 'true/true');
   }
 
-  getEventById(id: number): Observable<Event> {
-    return this.http.get<Event>(url + id);
+  ConsultarEventoPeloId(id: number): Observable<Evento> {
+    return this.http.get<Evento>(url + id);
   }
 
-  deleteEventById(id: number) {
+  /* POST */
+  cadastrarEvento(evento: Evento): Observable<Evento> {
+    return this.http.post<Evento>(url, evento);
+  }
+
+  /* DELETE */
+  deletarEventoPeloId(id: number) {
     return this.http.delete(url + id);
   }
 }

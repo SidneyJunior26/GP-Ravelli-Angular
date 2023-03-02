@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { MedicalRecord } from 'src/app/shared/models/medicalRecord';
 import { SecurityService } from '../Security/security.service';
 
-const url = 'http://localhost:3031/v1/RegistrosMedicos/';
+const url = 'https://localhost:3031/v1/RegistrosMedicos/';
 
 @Injectable({
   providedIn: 'root',
