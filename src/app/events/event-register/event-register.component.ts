@@ -12,8 +12,8 @@ import { SecurityService } from 'src/app/core/Security/security.service';
 import { ExternalService } from 'src/app/core/Shared/external.service';
 import { SubcategoriesService } from 'src/app/core/Subcategories/subcategories.service';
 import { LoginComponent } from 'src/app/shared/login/login.component';
-import { Atleta } from 'src/app/shared/models/athlete';
-import { Evento } from 'src/app/shared/models/events';
+import { Atleta } from 'src/app/shared/models/atleta';
+import { Evento } from 'src/app/shared/models/evento';
 import { MedicalRecord } from 'src/app/shared/models/medicalRecord';
 import { Regulation } from 'src/app/shared/models/regulation';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
@@ -256,7 +256,7 @@ export class EventRegisterComponent implements OnInit {
     let idade = moment().diff(nascimento, 'years');
 
     this.subCategoryService
-      .getSubcategories(this.event.id, category, idade, Number(sexo))
+      .getSubcategories(this.event.id!, category, idade, Number(sexo))
       .subscribe((subCategories) => {
         this.subCategorieList = [{ id: '', name: '', aviso: '' }];
 
@@ -319,7 +319,7 @@ export class EventRegisterComponent implements OnInit {
       },
       (error) => {
         if (error.status == 401) {
-          this.securityService.removeToken();
+          this.securityService.logOutToken();
           localStorage.setItem('eventId', this.eventId.toString());
           localStorage.setItem('cpf', this.cpfAthlete);
           this.dialog.open(LoginComponent);
@@ -347,7 +347,7 @@ export class EventRegisterComponent implements OnInit {
       },
       (error) => {
         if (error.status == 401) {
-          this.securityService.removeToken();
+          this.securityService.logOutToken();
           localStorage.setItem('eventId', this.eventId.toString());
           localStorage.setItem('cpf', this.cpfAthlete);
           this.dialog.open(LoginComponent);

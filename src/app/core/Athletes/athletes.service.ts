@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Atleta } from 'src/app/shared/models/athlete';
+import { Atleta } from 'src/app/shared/models/atleta';
 import { SecurityService } from '../Security/security.service';
 
 const url = 'https://localhost:3031/v1/Atletas/';

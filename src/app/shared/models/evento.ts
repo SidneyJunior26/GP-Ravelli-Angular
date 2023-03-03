@@ -1,14 +1,14 @@
 export interface Evento {
   [key: string]: any;
-  id: number;
+  id?: number;
   nome: string;
   descricao: string;
   local: string;
-  data: Date;
-  dataIniInscricao: Date;
-  dataFimInscricao: Date;
-  dataDesconto: Date;
-  dataValorNormal: Date;
+  data: string;
+  dataIniInscricao: string;
+  dataFimInscricao: string;
+  dataDesconto: string;
+  dataValorNormal: string;
   valor1: number;
   valor2: number;
   valorNormal: number;
@@ -25,7 +25,7 @@ export interface Evento {
   pacote2Desc: string;
   pacote3Desc: string;
   pacote4Desc: string;
-  pacote1Ativo: boolean;
+  pacote1Ativo: number;
   pacote2Ativo: number;
   pacote3Ativo: number;
   pacote4Ativo: number;
@@ -39,9 +39,9 @@ export interface Evento {
   obsTela: string;
   txtEmailCadastro: string;
   txtEmailBaixa: string;
-  ativaInscricao: boolean;
-  ativaEvento: boolean;
-  eventoTipo: boolean;
+  ativaInscricao: number;
+  ativaEvento: number;
+  eventoTipo: number;
   pacote1V1Pseg: string;
   pacote1V2Pseg: string;
   pacote1V3Pseg: string;
@@ -54,6 +54,6 @@ export interface Evento {
   pacote4V1Pseg: string;
   pacote4V2Pseg: string;
   pacote4V3Pseg: string;
-  notifications: [];
-  isValid: boolean;
+  notifications?: [];
+  isValid?: number;
 }

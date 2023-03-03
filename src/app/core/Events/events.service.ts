@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Evento } from 'src/app/shared/models/events';
+import { Evento } from 'src/app/shared/models/evento';
 import { SecurityService } from '../Security/security.service';
 
 const url = 'https://localhost:3031/v1/eventos/';
@@ -38,6 +38,10 @@ export class EventsService {
 
   /* POST */
   cadastrarEvento(evento: Evento): Observable<Evento> {
+    delete evento.id;
+    delete evento.notifications;
+    delete evento.isValid;
+
     return this.http.post<Evento>(url, evento);
   }
 

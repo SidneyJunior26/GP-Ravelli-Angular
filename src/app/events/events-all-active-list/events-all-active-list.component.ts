@@ -72,7 +72,7 @@ export class EventsAllActiveListComponent implements OnInit {
         if (error.status == 404)
           this.router.navigateByUrl('eventos/' + eventId);
         if (error.status == 401) {
-          this.securityService.removeToken();
+          this.securityService.logOutToken();
           this.logIn(cpf, eventId);
         }
       }

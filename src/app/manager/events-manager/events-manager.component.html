@@ -3,7 +3,7 @@
     <mat-tab label="Atletas">
       <div class="container">
         <div class="pnl-buttons">
-          <button mat-raised-button class="button-add" (click)="newEvent()">
+          <button mat-raised-button class="button-add">
             <mat-icon>add</mat-icon>
             <span>Novo Atleta</span>
           </button>
@@ -444,7 +444,7 @@
     <mat-tab label="Eventos">
       <div class="container">
         <div class="pnl-buttons">
-          <button mat-raised-button class="button-add" (click)="newEvent()">
+          <button mat-raised-button class="button-add">
             <mat-icon>add</mat-icon>
             <span>Novo Evento</span>
           </button>
@@ -869,8 +869,93 @@
             <mat-label>E-mail de Cadastro</mat-label>
             <input matInput formControlName="txtEmailCadastro" />
           </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>E-mail de Baixa</mat-label>
+            <input matInput formControlName="txtEmailBaixa" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Ativar Inscrição</mat-label>
+            <input matInput formControlName="ativaInscricao" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Ativar Evento</mat-label>
+            <input matInput formControlName="ativaEvento" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Tipo do Evento</mat-label>
+            <input matInput formControlName="eventoTipo" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote1V1Pseg</mat-label>
+            <input matInput formControlName="pacote1V1Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote1V2Pseg</mat-label>
+            <input matInput formControlName="pacote1V2Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote1V3Pseg</mat-label>
+            <input matInput formControlName="pacote1V3Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote2V1Pseg</mat-label>
+            <input matInput formControlName="pacote2V1Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote2V2Pseg</mat-label>
+            <input matInput formControlName="pacote2V2Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote2V3Pseg</mat-label>
+            <input matInput formControlName="pacote2V3Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote3V1Pseg</mat-label>
+            <input matInput formControlName="pacote3V1Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote3V2Pseg</mat-label>
+            <input matInput formControlName="pacote3V2Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote3V3Pseg</mat-label>
+            <input matInput formControlName="pacote3V3Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote4V1Pseg</mat-label>
+            <input matInput formControlName="pacote4V1Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote4V2Pseg</mat-label>
+            <input matInput formControlName="pacote4V2Pseg" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>pacote4V3Pseg</mat-label>
+            <input matInput formControlName="pacote4V3Pseg" />
+          </mat-form-field>
         </div>
-        <button mat-raised-button class="button-add">
+        <button
+          mat-raised-button
+          class="button-add"
+          [disabled]="eventoControl.invalid"
+          (click)="cadastrarEvento()"
+        >
           <mat-icon>save</mat-icon>
           Salvar
         </button>

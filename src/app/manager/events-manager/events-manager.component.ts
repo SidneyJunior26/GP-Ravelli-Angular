@@ -12,8 +12,8 @@ import { EventsService } from 'src/app/core/Events/events.service';
 import { SecurityService } from 'src/app/core/Security/security.service';
 import { ExternalService } from 'src/app/core/Shared/external.service';
 import { ImageUploadComponent } from 'src/app/shared/image-upload/image-upload.component';
-import { Atleta } from 'src/app/shared/models/athlete';
-import { Evento } from 'src/app/shared/models/events';
+import { Atleta } from 'src/app/shared/models/atleta';
+import { Evento } from 'src/app/shared/models/evento';
 import { LoginManagerComponent } from '../login-manager/login-manager.component';
 
 @Component({
@@ -167,15 +167,101 @@ export class EventsManagerComponent implements OnInit {
     }
 
     if (userInfo?.employee == undefined) {
-      this.router.navigateByUrl('/');
+      this.securityService.logOutToken();
     } else {
       this.carregarEventos();
       this.carregarAtletas();
     }
   }
 
-  newEvent() {
-    this.eventoControl.reset();
+  cadastrarEvento() {
+    this.evento.nome = this.eventoControl.get('nome')!.value!;
+    this.evento.descricao = this.eventoControl.get('descricao')!.value!;
+    this.evento.local = this.eventoControl.get('local')!.value!;
+    this.evento.data = this.eventoControl.get('data')!.value!;
+    this.evento.dataIniInscricao =
+      this.eventoControl.get('dataIniInscricao')!.value!;
+    this.evento.dataFimInscricao =
+      this.eventoControl.get('dataFimInscricao')!.value!;
+    this.evento.dataDesconto = this.eventoControl.get('dataDesconto')!.value!;
+    this.evento.dataValorNormal =
+      this.eventoControl.get('dataValorNormal')!.value!;
+    this.evento.valor1 = Number(this.eventoControl.get('valor1')!.value!);
+    this.evento.valor2 = Number(this.eventoControl.get('valor2')!.value!);
+    this.evento.valorNormal = Number(
+      this.eventoControl.get('valorNormal')!.value!
+    );
+    this.evento.pacote2V1 = Number(this.eventoControl.get('pacote2V1')!.value!);
+    this.evento.pacote2V2 = Number(this.eventoControl.get('pacote2V2')!.value!);
+    this.evento.pacote2V3 = Number(this.eventoControl.get('pacote2V3')!.value!);
+    this.evento.pacote3V1 = Number(this.eventoControl.get('pacote3V1')!.value!);
+    this.evento.pacote3V2 = Number(this.eventoControl.get('pacote3V2')!.value!);
+    this.evento.pacote3V3 = Number(this.eventoControl.get('pacote3V3')!.value!);
+    this.evento.pacote4V1 = Number(this.eventoControl.get('pacote4V1')!.value!);
+    this.evento.pacote4V2 = Number(this.eventoControl.get('pacote4V2')!.value!);
+    this.evento.pacote4V3 = Number(this.eventoControl.get('pacote4V3')!.value!);
+    this.evento.pacote1Desc = this.eventoControl.get('pacote1Desc')!.value!;
+    this.evento.pacote2Desc = this.eventoControl.get('pacote2Desc')!.value!;
+    this.evento.pacote3Desc = this.eventoControl.get('pacote3Desc')!.value!;
+    this.evento.pacote4Desc = this.eventoControl.get('pacote4Desc')!.value!;
+    this.evento.pacote1Ativo = Number(
+      this.eventoControl.get('pacote1Ativo')!.value!
+    );
+    this.evento.pacote2Ativo = Number(
+      this.eventoControl.get('pacote2Ativo')!.value!
+    );
+    this.evento.pacote3Ativo = Number(
+      this.eventoControl.get('pacote3Ativo')!.value!
+    );
+    this.evento.pacote4Ativo = Number(
+      this.eventoControl.get('pacote4Ativo')!.value!
+    );
+    this.evento.categoria = this.eventoControl.get('categoria')!.value!;
+    this.evento.boletoInf1 = this.eventoControl.get('boletoInf1')!.value!;
+    this.evento.boletoInf2 = this.eventoControl.get('boletoInf2')!.value!;
+    this.evento.boletoInf3 = this.eventoControl.get('boletoInf3')!.value!;
+    this.evento.boletoInstrucao1 =
+      this.eventoControl.get('boletoInstrucao1')!.value!;
+    this.evento.boletoInstrucao2 =
+      this.eventoControl.get('boletoInstrucao2')!.value!;
+    this.evento.boletoInstrucao3 =
+      this.eventoControl.get('boletoInstrucao3')!.value!;
+    this.evento.obsTela = this.eventoControl.get('obsTela')?.value!;
+    this.evento.txtEmailCadastro =
+      this.eventoControl.get('txtEmailCadastro')?.value!;
+    this.evento.txtEmailBaixa = this.eventoControl.get('txtEmailBaixa')?.value!;
+    this.evento.ativaInscricao = Number(
+      this.eventoControl.get('ativaInscricao')?.value!
+    );
+    this.evento.ativaEvento = Number(
+      this.eventoControl.get('ativaEvento')?.value!
+    );
+    this.evento.eventoTipo = Number(
+      this.eventoControl.get('eventoTipo')?.value!
+    );
+    this.evento.pacote1V1Pseg = this.eventoControl.get('pacote1V1Pseg')?.value!;
+    this.evento.pacote1V2Pseg = this.eventoControl.get('pacote1V2Pseg')?.value!;
+    this.evento.pacote1V3Pseg = this.eventoControl.get('pacote1V3Pseg')?.value!;
+    this.evento.pacote2V1Pseg = this.eventoControl.get('pacote2V1Pseg')?.value!;
+    this.evento.pacote2V2Pseg = this.eventoControl.get('pacote2V2Pseg')?.value!;
+    this.evento.pacote2V3Pseg = this.eventoControl.get('pacote2V3Pseg')?.value!;
+    this.evento.pacote3V1Pseg = this.eventoControl.get('pacote3V1Pseg')?.value!;
+    this.evento.pacote3V2Pseg = this.eventoControl.get('pacote3V2Pseg')?.value!;
+    this.evento.pacote3V3Pseg = this.eventoControl.get('pacote3V3Pseg')?.value!;
+    this.evento.pacote4V1Pseg = this.eventoControl.get('pacote4V1Pseg')?.value!;
+    this.evento.pacote4V2Pseg = this.eventoControl.get('pacote4V2Pseg')?.value!;
+    this.evento.pacote4V3Pseg = this.eventoControl.get('pacote4V3Pseg')?.value!;
+
+    console.log(this.evento);
+    this.eventoService.cadastrarEvento(this.evento).subscribe(
+      () => {
+        this.abrirMensagem('Evento Cadastrado com Sucesso!');
+        //this.carregarEventos();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.tabGroup.selectedIndex = 3;
   }
 
@@ -188,7 +274,7 @@ export class EventsManagerComponent implements OnInit {
       },
       (error) => {
         if (error.status == 401) {
-          this.router.navigateByUrl('/');
+          this.securityService.logOutToken();
         }
       }
     );
@@ -215,7 +301,7 @@ export class EventsManagerComponent implements OnInit {
       },
       (error) => {
         if (error.status == 401) {
-          this.router.navigateByUrl('/');
+          this.securityService.logOutToken();
         }
       }
     );
@@ -253,7 +339,7 @@ export class EventsManagerComponent implements OnInit {
 
       if (this.evento != null) {
         this.carregarEvento();
-        this.carregarImagemEvento(this.evento.id);
+        this.carregarImagemEvento(this.evento.id!);
         this.tabGroup.selectedIndex = 3;
       }
     });
@@ -270,17 +356,6 @@ export class EventsManagerComponent implements OnInit {
   private carregarImagemEvento(idEvento: number) {
     var imageUploadComponent = new ImageUploadComponent(this.http);
     imageUploadComponent.carregarImagem(idEvento);
-  }
-
-  cadastrarEvento() {
-    for (const event in this.eventoControl) {
-      this.evento[event] = event;
-    }
-
-    this.eventoService.cadastrarEvento(this.evento).subscribe(() => {
-      this.abrirMensagem('Evento cadastrado com sucesso.');
-      this.carregarEventos();
-    });
   }
 
   deleteEvent(eventId: number) {

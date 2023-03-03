@@ -28,9 +28,9 @@ export class SecurityService {
     return tokenValue;
   }
 
-  removeToken() {
+  logOutToken() {
     localStorage.removeItem(this.tokenKey);
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/');
   }
 
   public getAuthentiaction(): HttpHeaders {
